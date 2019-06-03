@@ -1,0 +1,10 @@
+.title {
+  margin: 1rem;
+  padding: 16px 24px;
+  font-family: 'Roboto Slab';
+  font-size: 48px;
+  text-align: center;
+  text-shadow: black 2px 2px 0, black -2px -2px 0, 
+               black -2px 2px 0, black 2px -2px 0;
+  color: white;
+}
