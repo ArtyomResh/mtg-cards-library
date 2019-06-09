@@ -19,8 +19,12 @@ module.exports = {
     'react',
   ],
   rules: {
-    'no-useless-escape': 'off',
+    'arrow-parens': 'off',
+    'consistent-return': 'off',
+    'newline-per-chained-call': 'off',
     'no-console': 'off',
+    'no-useless-escape': 'off',
+    'no-underscore-dangle': 'off',
     'react/prop-types': 'off',
     'react/no-deprecated': 'off',
     'react/no-find-dom-node': 'off',
