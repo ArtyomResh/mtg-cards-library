@@ -1,27 +1,60 @@
-const Joi = require('@hapi/joi')
+import { isEmpty } from 'ramda'
+import {
+  composeValidators,
+  equalsTo,
+  email,
+  alphanum,
+  required,
+  minLength,
+  maxLength,
+} from './validators'
 
-const name = Joi.string().alphanum().min(3).max(30).required()
-const email = Joi.string().email({ minDomainSegments: 2 }).required()
-const password = Joi.string().regex(/^[a-zA-Z0-9]{6,1024}$/).required()
+const validateName = composeValidators(required(), minLength(3), maxLength(30), alphanum())
+const validateEmail = composeValidators(required(), email())
+const validatePassword = composeValidators(required(), minLength(6), maxLength(20), alphanum())
 
-const registerValidation = user => {
-  const schema = Joi.object().keys({
-    name,
-    email,
-    password,
-  })
+const loginValidation = values => {
+  let errors = {}
 
-  return Joi.validate(user, schema)
+  const emailErrors = validateEmail(values.email)
+  const passwordErrors = validatePassword(values.password)
+
+  if (emailErrors) {
+    errors.email = emailErrors
+  }
+
+  if (passwordErrors) {
+    errors.password = passwordErrors
+  }
+
+  return isEmpty(errors) ? null : errors
 }
 
-const loginValidation = user => {
-  const schema = Joi.object().keys({
-    email,
-    password,
-  })
+const registerValidation = values => {
+  let errors = {}
 
-  return Joi.validate(user, schema)
+  const nameErrors = validateName(values.name)
+  const emailErrors = validateEmail(values.email)
+  const passwordErrors = validatePassword(values.password)
+  const confirmPasswordErrors = composeValidators(required(), equalsTo(values.password))(values.confirmPassword)
+
+  if (nameErrors) {
+    errors.name = nameErrors
+  }
+
+  if (emailErrors) {
+    errors.email = emailErrors
+  }
+
+  if (passwordErrors) {
+    errors.password = passwordErrors
+  }
+
+  if (confirmPasswordErrors) {
+    errors.confirmPassword = confirmPasswordErrors
+  }
+
+  return isEmpty(errors) ? null : errors
 }
 
-module.exports.registerValidation = registerValidation
-module.exports.loginValidation = loginValidation
+export { registerValidation, loginValidation }

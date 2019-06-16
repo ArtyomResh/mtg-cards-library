@@ -1,6 +1,6 @@
 module.exports = (req, res) => {
   res
     .send('logged out')
-    .clearCookie('user_sid')
+    .clearCookie('mtg_library_user_sid')
     .redirect('/')
 }

@@ -3,18 +3,18 @@ const User = require('../../../models/User').default
 const validateUser = require('../../../utils/validation/user')
 
 module.exports = (req, res) => {
-  const { name, email, password } = req.body
-  const { error: validationError } = validateUser.registerValidation({ name, email, password })
+  const { name, email, password, confirmPassword } = req.body
+  const validationErrors = validateUser.registerValidation({ name, email, password, confirmPassword })
 
-  if (validationError) {
-    return res.status(400).send(validationError.details[0].message)
+  if (validationErrors) {
+    return res.status(400).send({ message: 'Invalid values', values: validationErrors, status: 400 })
   }
 
   User
     .findOne({ name })
     .then(user => {
       if (user) {
-        res.status(400).send('user with same name is already exists')
+        res.status(400).send({ message: 'User with same name is already exists', status: 400 })
       }
     })
 
@@ -22,7 +22,7 @@ module.exports = (req, res) => {
     .findOne({ email })
     .then(user => {
       if (user) {
-        res.status(400).send('user with same email is already exists')
+        res.status(400).send({ message: 'User with same email is already exists', status: 400 })
       }
     })
 

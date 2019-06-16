@@ -10,6 +10,7 @@ const options = {
   host: 'localhost',
   hot: true,
   stats: 'minimal',
+  historyApiFallback: true,
   proxy: {
     '/api': {
       target: 'http://localhost:3030',

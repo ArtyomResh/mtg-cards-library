@@ -1,13 +1,36 @@
 
 import { hot } from 'react-hot-loader/root'
-import React from 'react'
-import Title from '../Title'
-import './App.css'
+import React, { Fragment, PureComponent } from 'react'
+import { bool, func } from 'prop-types'
+import Search from '../Search'
+import Cards from '../Cards'
+import SignUp from '../SignUp'
+import Login from '../Login'
+import '../../styles/variables.styl'
+import '../../styles/normalize.styl'
+import '../../styles/fonts.styl'
+import styles from './App.styl'
 
-const App = () => (
-  <div>
-    <Title>Welcome to MTG Cards Library!</Title>
-  </div>
-)
+class App extends PureComponent {
+  componentWillMount() {
+    this.props.checkLogin()
+  }
+
+  render() {
+    return (
+      <main className={styles.app}>
+        <Search />
+        {/* <SignUp />
+        <Login isLogedIn={this.props.isLogedIn} /> */}
+        <Cards />
+      </main>
+    )
+  }
+}
+
+App.propTypes = {
+  isLogedIn: bool,
+  checkLogin: func,
+}
 
 export default hot(App)

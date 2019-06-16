@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const deckRouter = require('./decks')
@@ -30,11 +31,23 @@ mongoose.connect(
   () => console.log('\x1b[33m', DB_MESSAGE, '\x1b[0m'),
 )
 
+app.use(cors())
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use('/decks', deckRouter)
 app.use('/users', userRouter)
 app.use('/auth', authRouter)
+
+// TODO: ERROR handling HERE
+// app.get('/*', (req, res) => {
+//   res.sendFile(
+//     path.join(__dirname, '../../assets/index.html'),
+//     err => {
+//       if (err) {
+//         res.status(500).send(err)
+//       }
+//     })
+// })
 
 app.listen(
   3030,
