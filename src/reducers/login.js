@@ -4,14 +4,15 @@ import { createReducer, createAction } from 'redux-act'
 const submitLoginSuccess = createAction('SUBMIT_LOGIN_SUCCESS')
 const handleSubmitLoginSuccess = state => ({
   ...state,
-  isSubmiting: false,
+  isSubmitting: false,
   isLoggedIn: true,
+  error: {},
 })
 
 const submitLoginFail = createAction('SUBMIT_LOGIN_FAIL')
 const handleSubmitLoginFail = (state, payload) => ({
   ...state,
-  isSubmiting: false,
+  isSubmitting: false,
   isLoggedIn: false,
   error: {
     message: payload.message,
@@ -22,7 +23,7 @@ const handleSubmitLoginFail = (state, payload) => ({
 export const submitLogin = createAction('SUBMIT_LOGIN')
 const handleSubmitLogin = state => ({
   ...state,
-  isSubmiting: true,
+  isSubmitting: true,
   isLoggedIn: false,
 })
 /** Submit login ending */
@@ -55,7 +56,7 @@ const actions = {
 }
 
 const initialState = {
-  isSubmiting: false,
+  isSubmitting: false,
   isLoggedIn: false,
   error: {},
 }

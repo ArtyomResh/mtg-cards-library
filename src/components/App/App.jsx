@@ -4,8 +4,7 @@ import React, { PureComponent } from 'react'
 import { bool, func } from 'prop-types'
 import Search from '../Search'
 import Cards from '../Cards'
-import SignUp from '../SignUp'
-import Login from '../Login'
+import Authorization from '../Authorization'
 import '../../styles/variables.styl'
 import '../../styles/normalize.styl'
 import '../../styles/fonts.styl'
@@ -25,8 +24,10 @@ class App extends PureComponent {
         </article>
         <aside>
           <h2>Log in to Card Library</h2>
-          {/* <SignUp /> */}
-          <Login isLoggedIn={this.props.isLoggedIn} />
+          {this.props.isLoggedIn
+            ? 'Hello'
+            : <Authorization />
+          }
         </aside>
       </main>
     )

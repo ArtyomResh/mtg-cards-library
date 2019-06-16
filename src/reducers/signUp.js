@@ -4,14 +4,15 @@ import { createReducer, createAction } from 'redux-act'
 const submitSignUpSuccess = createAction('SUBMIT_SIGN_UP_SUCCESS')
 const handleSubmitSignUpSuccess = state => ({
   ...state,
-  isSubmiting: false,
+  isSubmitting: false,
   isSignUp: true,
+  error: {},
 })
 
 const submitSignUpFail = createAction('SUBMIT_SIGN_UP_FAIL')
 const handleSubmitSignUpFail = (state, payload) => ({
   ...state,
-  isSubmiting: false,
+  isSubmitting: false,
   isSignUp: false,
   error: {
     message: payload.message,
@@ -22,7 +23,7 @@ const handleSubmitSignUpFail = (state, payload) => ({
 export const submitSignUp = createAction('SUBMIT_SIGN_UP')
 const handleSubmitSignUp = state => ({
   ...state,
-  isSubmiting: true,
+  isSubmitting: true,
   isSignUp: false,
 })
 /** Submit signUp ending */
@@ -34,7 +35,7 @@ const actions = {
 }
 
 const initialState = {
-  isSubmiting: false,
+  isSubmitting: false,
   isSignUp: false,
   error: {},
 }

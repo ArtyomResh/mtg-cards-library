@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
-import * as loginActions from '../../reducers/login'
+import * as loginActions from '../../../reducers/login'
 import Login from './Login'
 
-const mapStateToProps = (state, props) => ({
-  isLoggedIn: props.isLoggedIn,
+const mapStateToProps = ({ login }) => ({
+  submitError: login.error.message,
 })
 
 const mapDispatchToProps = {
