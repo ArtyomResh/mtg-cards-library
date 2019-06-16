@@ -1,6 +1,6 @@
 
 import { hot } from 'react-hot-loader/root'
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { bool, func } from 'prop-types'
 import Search from '../Search'
 import Cards from '../Cards'
@@ -19,17 +19,22 @@ class App extends PureComponent {
   render() {
     return (
       <main className={styles.app}>
-        <Search />
-        {/* <SignUp />
-        <Login isLogedIn={this.props.isLogedIn} /> */}
-        <Cards />
+        <article>
+          <Search />
+          <Cards />
+        </article>
+        <aside>
+          <h2>Log in to Card Library</h2>
+          {/* <SignUp /> */}
+          <Login isLoggedIn={this.props.isLoggedIn} />
+        </aside>
       </main>
     )
   }
 }
 
 App.propTypes = {
-  isLogedIn: bool,
+  isLoggedIn: bool,
   checkLogin: func,
 }
 

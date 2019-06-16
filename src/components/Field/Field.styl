@@ -1,0 +1,93 @@
+.field-wrapper
+  margin-top: 24px
+  position: relative;
+  height: 40px;
+
+  & input,
+  & input:-webkit-autofill
+    -webkit-appearance: none;
+    margin-top: 0;
+    padding-top: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: solid 1px var(--greyish-teal);
+    border-radius: 0;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+    color: var(--white);
+    background-color: var(--dark-grey);
+    caret-color: var(--greyish-teal);
+
+  & input:focus,
+  & input:-webkit-autofill:focus
+    outline: none;
+    border-color: var(--butterscotch);
+
+  & input:hover,
+  & input:-webkit-autofill:hover
+    border-color: var(--greyish-teal);
+
+  & label
+    position: absolute;
+    margin: auto;
+    top: 12px;
+    left: 16px;
+    height: 16px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+    color: var(--greyish-teal);
+    pointer-events: none;
+    user-select: none;
+    transition: top 0.05s, font-size 0.05s;
+
+  & span.error
+    margin-top: 2px;
+    display: block;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+    color: var(--danger-red);
+
+  & input:focus + label
+    color: var(--butterscotch);
+
+  &_filled label,
+  & input:focus + label
+    top: 4px;
+    font-size: 10px;
+
+  // div.font_inputted-text-error input:not(:focus)
+  //   border-color: #d0021b;
+  //
+
+  // div.font_inputted-text-error label:not(:focus)
+  //   color: #d0021b;
+  //
+
+  // div.font_inputted-text-error.textfield_regular input:not(:focus)
+  //   border-width: 2px;
+  //   padding-left: 0.9375rem;
+  //
+
+  // div.font_inputted-text-error input:focus
+  //   color: #4a4a4a;
+  //   border-color: #e1e1e1;
+  //

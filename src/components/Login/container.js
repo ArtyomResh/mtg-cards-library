@@ -3,7 +3,7 @@ import * as loginActions from '../../reducers/login'
 import Login from './Login'
 
 const mapStateToProps = (state, props) => ({
-  isLogedIn: props.isLogedIn,
+  isLoggedIn: props.isLoggedIn,
 })
 
 const mapDispatchToProps = {

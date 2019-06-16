@@ -10,7 +10,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules|bower_components])/,
+        exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         options: { presets: ['@babel/env'] },
       },
@@ -48,7 +48,17 @@ module.exports = {
       },
       {
         test: /\.(svg)$/,
+        issuer: {
+          test: /\.(js|jsx)$/
+        },
         use: ['@svgr/webpack', 'file-loader'],
+      },
+      {
+        test: /\.(svg)$/,
+        issuer: {
+          exclude: /\.(js|jsx)$/
+        },
+        use: ['file-loader'],
       },
     ],
   },

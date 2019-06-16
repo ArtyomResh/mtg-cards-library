@@ -1,9 +1,9 @@
 
 import React, { PureComponent, Fragment } from 'react'
-import { bool } from 'prop-types'
-import { Form, Field } from 'react-final-form'
+import { Form } from 'react-final-form'
+import Field from '../Field'
 import { loginValidation } from '../../../utils/validation/user'
-import './Login.styl'
+import styles from './Login.styl'
 
 class Login extends PureComponent {
   handleSubmit = values => {
@@ -11,48 +11,29 @@ class Login extends PureComponent {
   }
 
   render() {
-    return this.props.isLogedIn 
-      ? <button>Log out</button>
-      : <Form
-        onSubmit={this.handleSubmit}
-        validate={loginValidation}
-        render={({ handleSubmit, pristine, invalid }) => (
-          <form onSubmit={handleSubmit}>
-            <div>
-              <Field name="email" >
-                {({ input, meta }) => (
-                  <Fragment>
-                    <label>Email</label>
-                    <input {...input} type="email" placeholder="Email" />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </Fragment>
-                )}
-              </Field>
-            </div>
+    return (
+      <Fragment>
+        <Form
+          onSubmit={this.handleSubmit}
+          validate={loginValidation}
+          render={({ handleSubmit, pristine, invalid }) => (
+            <form autoComplete="off" className={styles.form} onSubmit={handleSubmit}>
+              <Field id="login_email_field" name="email" type="email" label="Email" />
+              <Field id="login_password_field" name="password" type="password" label="Password" />
 
-            <div>
-              <Field name="password" >
-                {({ input, meta }) => (
-                  <Fragment>
-                    <label>Password</label>
-                    <input {...input} type="password" placeholder="Password" />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                  </Fragment>
-                )}
-              </Field>
-            </div>
+              <button type="submit" disabled={pristine || invalid}>
+                Log in
+              </button>
+            </form>
+          )}
+        />
 
-            <button type="submit" disabled={pristine || invalid}>
-              Log in
-            </button>
-          </form>
-        )}
-      />
+        <span className={styles['sign-up']}>
+          Haven’t account yet? <a>Sign up!</a>
+        </span>
+      </Fragment>
+    )
   }
-}
-
-Login.propTypes = {
-  isLogedIn: bool,
 }
 
 export default Login

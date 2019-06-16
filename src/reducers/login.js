@@ -5,14 +5,14 @@ const submitLoginSuccess = createAction('SUBMIT_LOGIN_SUCCESS')
 const handleSubmitLoginSuccess = state => ({
   ...state,
   isSubmiting: false,
-  isLogedIn: true,
+  isLoggedIn: true,
 })
 
 const submitLoginFail = createAction('SUBMIT_LOGIN_FAIL')
 const handleSubmitLoginFail = (state, payload) => ({
   ...state,
   isSubmiting: false,
-  isLogedIn: false,
+  isLoggedIn: false,
   error: {
     message: payload.message,
     status: payload.status,
@@ -23,7 +23,7 @@ export const submitLogin = createAction('SUBMIT_LOGIN')
 const handleSubmitLogin = state => ({
   ...state,
   isSubmiting: true,
-  isLogedIn: false,
+  isLoggedIn: false,
 })
 /** Submit login ending */
 
@@ -31,13 +31,13 @@ const handleSubmitLogin = state => ({
 const checkLoginSuccess = createAction('CHECK_LOGIN_SUCCESS')
 const handleCheckLoginSuccess = state => ({
   ...state,
-  isLogedIn: true,
+  isLoggedIn: true,
 })
 
 const checkLoginFail = createAction('CHECK_LOGIN_FAIL')
 const handleCheckLoginFail = state => ({
   ...state,
-  isLogedIn: false,
+  isLoggedIn: false,
 })
 
 export const checkLogin = createAction('CHECK_LOGIN')
@@ -56,7 +56,7 @@ const actions = {
 
 const initialState = {
   isSubmiting: false,
-  isLogedIn: false,
+  isLoggedIn: false,
   error: {},
 }
 
