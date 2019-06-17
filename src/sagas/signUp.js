@@ -11,6 +11,7 @@ const submitSignUpRequest = ({ name, email, password, confirmPassword }) =>
     body: JSON.stringify({ name, email, password, confirmPassword }),
   })
     .then(response => response.json())
+    .catch(error => error)
 
 function* submitSignUpWorker(action) {
   try {
@@ -23,7 +24,7 @@ function* submitSignUpWorker(action) {
 
     yield put({ type: 'SUBMIT_SIGN_UP_SUCCESS' })
   } catch (error) {
-    yield put({ type: 'SUBMIT_SIGN_UP_FAIL', payload: error })
+    yield put({ type: 'SUBMIT_SIGN_UP_FAIL', payload: error.message })
   }
 }
 /** Submit signUp saga ending */

@@ -26,6 +26,7 @@ module.exports = (req, res) => {
       const salt = bcrypt.genSaltSync(10)
       const hashedUserId = bcrypt.hashSync(user._id.toString(), salt)
 
+      // TODO встроить нормальный инструмент идентификации пользователей (см. passport.js)
       res
         .cookie(
           'mtg_library_user_sid',
@@ -35,6 +36,19 @@ module.exports = (req, res) => {
             path: '/',
           },
         )
-        .send({ message: 'Logged in' })
+        .cookie(
+          'mtg_library_user_id',
+          user._id.toString(),
+          {
+            maxAge: 60 * 60 * 24 * 30,
+            path: '/',
+          },
+        )
+        .json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          decks: user.decks,
+        })
     })
 }

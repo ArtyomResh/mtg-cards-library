@@ -2,8 +2,10 @@
 import { hot } from 'react-hot-loader/root'
 import React, { PureComponent } from 'react'
 import { bool, func } from 'prop-types'
+import Header from './Header'
 import Search from '../Search'
 import Cards from '../Cards'
+import Decks from '../Decks'
 import Authorization from '../Authorization'
 import '../../styles/variables.styl'
 import '../../styles/normalize.styl'
@@ -16,6 +18,8 @@ class App extends PureComponent {
   }
 
   render() {
+    const { isLoggedIn } = this.props
+
     return (
       <main className={styles.app}>
         <article>
@@ -23,9 +27,9 @@ class App extends PureComponent {
           <Cards />
         </article>
         <aside>
-          <h2>Log in to Card Library</h2>
-          {this.props.isLoggedIn
-            ? 'Hello'
+          <Header isLoggedIn={isLoggedIn} />
+          { isLoggedIn
+            ? <Decks />
             : <Authorization />
           }
         </aside>

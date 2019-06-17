@@ -10,8 +10,8 @@ module.exports = (req, res) => {
         res.status(400).send('Requested user do not exists')
       }
 
-      return user.decks
+      return user
     })
-    .then(decks => res.json(decks))
+    .then(user => res.json(user))
     .catch(err => res.status(404).json({ message: err }))
 }

@@ -12,19 +12,27 @@ const submitLoginRequest = ({ email, password }) =>
     body: JSON.stringify({ email, password }),
   })
     .then(response => response.json())
+    .catch(error => error)
 
 function* submitLoginWorker(action) {
   try {
-    const { message, status } = yield call(submitLoginRequest, action.payload)
+    const {
+      _id,
+      name,
+      email,
+      decks,
+      message,
+      status,
+    } = yield call(submitLoginRequest, action.payload)
 
     if (status >= 400) {
       yield put({ type: 'SUBMIT_LOGIN_FAIL', payload: { message } })
       yield cancel()
     }
 
-    yield put({ type: 'SUBMIT_LOGIN_SUCCESS' })
+    yield put({ type: 'SUBMIT_LOGIN_SUCCESS', payload: { _id, name, email, decks } })
   } catch (error) {
-    yield put({ type: 'SUBMIT_LOGIN_FAIL', payload: error })
+    yield put({ type: 'SUBMIT_LOGIN_FAIL', payload: error.message })
   }
 }
 /** Submit login saga ending */
@@ -32,14 +40,16 @@ function* submitLoginWorker(action) {
 /** Check login saga beginning */
 function* checkLoginWorker() {
   try {
-    const isMtgLibraryCookieExists = yield call(() => checkCookieExistenceByName('mtg_library_user_sid'))
-    if (isMtgLibraryCookieExists) {
+    const mtgLibrarySessionCookie = yield call(() => checkCookieExistenceByName('mtg_library_user_sid'))
+    const isLibrarySessionCookieExists = mtgLibrarySessionCookie.length
+
+    if (isLibrarySessionCookieExists) {
       yield put({ type: 'CHECK_LOGIN_SUCCESS' })
     } else {
       yield put({ type: 'CHECK_LOGIN_FAIL', payload: { message: 'You are not logged in' } })
     }
   } catch (error) {
-    yield put({ type: 'CHECK_LOGIN_FAIL', payload: error })
+    yield put({ type: 'CHECK_LOGIN_FAIL', payload: error.message })
   }
 }
 /** Check login saga ending */

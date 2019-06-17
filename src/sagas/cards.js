@@ -40,7 +40,7 @@ function* getCardsWorker(action) {
       yield put({ type: 'GET_CARDS_SUCCESS', payload: { data, total_cards } })
     }
   } catch (error) {
-    yield put({ type: 'GET_CARDS_FAIL', payload: error })
+    yield put({ type: 'GET_CARDS_FAIL', payload: error.message })
   }
 }
 /** Get cards saga end */
